@@ -69,7 +69,6 @@ a=1
 #Main Logic Of THe Game....
 while True:
     for event in pygame.event.get():
-        ke = event.type
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
