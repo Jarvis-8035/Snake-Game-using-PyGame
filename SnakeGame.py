@@ -14,7 +14,7 @@ else:
 #Play Surface
 playSurface = pygame.display.set_mode((720,460))
 pygame.display.set_caption("Snake Game")
-#time.sleep(2)
+time.sleep(2)
 
 #colors
 red = pygame.Color(255,0,0) #gameover
@@ -27,8 +27,8 @@ brown = pygame.Color(165,42,42) #food
 fpsController = pygame.time.Clock()
 
 #Important Variables
-snakePos = [100,50]
-snakeBody = [[100,50],[90,50],[80,50]]
+snakePos = [50,50]
+snakeBody = [[50,50],[40,50]]
 
 foodPos = [random.randrange(1,72)*10,random.randrange(1,46)*10]
 foodSpawn = True
@@ -43,40 +43,46 @@ def gameOver():
     GOrect = GOsurf.get_rect()
     GOrect.midtop = (360,15)
     playSurface.blit(GOsurf,GOrect)
-    showScore(0)
+    showScoreEOGame()
     pygame.display.flip() #UPDATE FUNCTION!!
     time.sleep(2)
     pygame.quit() #PyGame Exit
     sys.exit()    #System Exit
     
-#Score Function
-def showScore(choice=1):
+#Score Function for In Game
+def showScoreInGame():
     sFont = pygame.font.SysFont('monaco',22)
     Ssurf = sFont.render('SCORE : {0}'.format(score),True,black)
     Srect = Ssurf.get_rect()
-    if choice == 1:
-        Srect.midtop = (80,10)
-    else:
-        Srect.midtop = (360,120)
+    Srect.midtop = (80,10)
+    playSurface.blit(Ssurf,Srect)
+
+#Score Function for End of Game
+def showScoreEOGame():
+    sFont = pygame.font.SysFont('monaco',22)
+    Ssurf = sFont.render('SCORE : {0}'.format(score),True,black)
+    Srect = Ssurf.get_rect()
+    Srect.midtop = (360,120)
     playSurface.blit(Ssurf,Srect)
     
 a=1
 #Main Logic Of THe Game....
 while True:
     for event in pygame.event.get():
+        ke = event.key
         if event.type == pygame.QUIT:
             pygame.quit()
             sys.exit()
         elif event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_RIGHT or event.key == ord('d'):
+            if ke == pygame.K_RIGHT or ke == ord('d'):
                 changeTo = 'RIGHT'
-            if event.key == pygame.K_LEFT or event.key == ord('a'):
+            if ke == pygame.K_LEFT or ke == ord('a'):
                 changeTo = 'LEFT'
-            if event.key == pygame.K_UP or event.key == ord('w'):
+            if ke == pygame.K_UP or ke == ord('w'):
                 changeTo = 'UP'
-            if event.key == pygame.K_DOWN or event.key == ord('s'):
+            if ke == pygame.K_DOWN or ke == ord('s'):
                 changeTo = 'DOWN'
-            if event.key == pygame.K_ESCAPE:
+            if ke == pygame.K_ESCAPE:
                 pygame.event.post(pygame.event.Event(pygame.QUIT))
         
     #Validation Of Directions....
@@ -130,6 +136,6 @@ while True:
             gameOver()
     
     #Updation and speed Control    
-    showScore()
+    showScoreInGame()
     pygame.display.flip()  
-    fpsController.tick(25)                          
+    fpsController.tick(20)                          
