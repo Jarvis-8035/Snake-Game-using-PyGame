@@ -75,13 +75,13 @@ while True:
             sys.exit()
         elif event.type == pygame.KEYDOWN:
             keys = pygame.key.get_pressed()
-            if keys[pygame.K_RIGHT]:
+            if keys[pygame.K_RIGHT] or keys[ord('d')]:
                 changeTo = 'RIGHT'
-            if keys[pygame.K_LEFT]:
+            if keys[pygame.K_LEFT] or keys[ord('a')]:
                 changeTo = 'LEFT'
-            if keys[pygame.K_UP]:
+            if keys[pygame.K_UP] or keys[ord('w')]:
                 changeTo = 'UP'
-            if keys[pygame.K_DOWN]:
+            if keys[pygame.K_DOWN] or keys[ord('s')]:
                 changeTo = 'DOWN'
             if keys[pygame.K_ESCAPE]:
                 pygame.event.post(pygame.event.Event(pygame.QUIT))
