@@ -69,20 +69,21 @@ a=1
 #Main Logic Of THe Game....
 while True:
     for event in pygame.event.get():
-        ke = event.key
-        if event.type == pygame.QUIT:
+        ke = event.type
+        if ke == pygame.QUIT:
             pygame.quit()
             sys.exit()
-        elif event.type == pygame.KEYDOWN:
-            if ke == pygame.K_RIGHT or ke == ord('d'):
+        elif ke == pygame.KEYDOWN:
+            keys = pygame.key.get_pressed()
+            if ke == keys[pygame.K_RIGHT] or ke == keys[ord('d')]:
                 changeTo = 'RIGHT'
-            if ke == pygame.K_LEFT or ke == ord('a'):
+            if ke == keys[pygame.K_LEFT] or ke == keys[ord('a')]:
                 changeTo = 'LEFT'
-            if ke == pygame.K_UP or ke == ord('w'):
+            if ke == keys[pygame.K_UP] or ke == keys[ord('w')]:
                 changeTo = 'UP'
-            if ke == pygame.K_DOWN or ke == ord('s'):
+            if ke == keys[pygame.K_DOWN] or ke == keys[ord('s')]:
                 changeTo = 'DOWN'
-            if ke == pygame.K_ESCAPE:
+            if ke == keys[pygame.K_ESCAPE]:
                 pygame.event.post(pygame.event.Event(pygame.QUIT))
         
     #Validation Of Directions....
